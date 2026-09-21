@@ -1,35 +1,65 @@
-body {    
-    background-position: center;  
-    opacity: 90%;
+/* ==========================================
+   1. BASE STYLES (Shared across all screens)
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f4f6f9;
+    background-position: center;
+    opacity: 0.9;
     animation: fadeUp 0.8s ease-in;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
 }
 
 main {
     background-color: rgb(255, 255, 255);
-    border: 5px solid;
-    border-radius: 5px;
     border-color: rgba(11, 42, 83);
+    border-style: solid;
+    border-radius: 5px;
     margin: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 1px;
-    padding-top: 1px;
 }
 
-.top {
-    display: flex;
-    margin-top: 10px;
-    gap: 4rem;
-    align-items: center;
-    justify-content: center;
-    max-width: 1500px;
+.button {
+    display: inline-block;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(11, 42, 83);
+    border: 2px solid rgba(253, 187, 8);
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(11, 42, 83);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+}
+
+.button:hover {
+    transform: scale(1.02);
+    background-color: rgba(253, 187, 8);
+    border-color: rgba(11, 42, 83);
+    color: rgba(11, 42, 83);
+    filter: drop-shadow(0 0 6px rgba(11, 42, 83));
+    box-shadow: 0 0 20px 2px rgba(11, 42, 83);
 }
 
 .logo img {
-    align-items: center;
-    width: 550px;
-    height: 550px;
-    margin-top: 25px;
+    height: auto; /* Keeps image proportions clean */
+    transition: transform 0.4s ease, filter 0.4s ease;
 }
 
 .logo img:hover {
@@ -37,81 +67,249 @@ main {
     filter: drop-shadow(0 0 6px rgba(118, 3, 118, 0.5));
 }
 
-.text {
-    flex: 1 1 50%;             
-    text-align: center;
-    padding: 10px 0;
-    max-width: 650px;
-}
-
-.text h1 {
-    color: rgba(11, 42, 83);
-    font-size: 50px;
-}
-
-.text p {
-    font-size: 20px;
-    font-style: oblique;
-    line-height: 1.5;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 50px;
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    background-color: rgba(11, 42, 83);
-    border: 2px solid;
-    border-radius: 8px;
-    border-color: rgba(253, 187, 8);
-    text-decoration: none; 
-    cursor: pointer;
-    margin-top: 45px;
-    margin-right: 27px;
-    box-shadow: 0 0 5px rgba(11, 42, 83);
-    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
-}
-
-.button:hover {
-    transform: scale(1.02);
-    background-color: rgba(253, 187, 8);
-    border-color: rgba(11, 42, 83);
-    filter: drop-shadow(0 0 6px rgba(11, 42, 83));
-    box-shadow: 0 0 20px 2px rgba(11, 42, 83);
-    transform: scale(1.011);
-}
-
 .Upcoming {
     background-color: rgba(11, 42, 83);
-    height: auto;
-    margin: 10px;
-    margin-top: 65px;
-    margin-bottom: 25px;
-    padding: 10px;
     border-radius: 10px;
-    border: 3px solid;
-    border-color: rgba(253, 187, 8);
+    border: 3px solid rgba(253, 187, 8);
     box-shadow: 0 0 5px rgba(11, 42, 83);
-    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .Upcoming:hover {
-    border-color:rgba(11, 42, 83);;
+    border-color: rgba(11, 42, 83);
     filter: drop-shadow(0 0 6px rgba(118, 3, 118, 0.5));
     background-color: rgba(253, 187, 8);
     box-shadow: 0 0 20px 2px rgba(11, 42, 83);
     transform: scale(1.011);
 }
 
-.Upcoming h2 {
-    color: white;
-    padding-left: 10px;
-    font-size: 25px;
-    margin-top: 10px;
+.Upcoming:hover h2,
+.Upcoming:hover li {
+    color: rgba(11, 42, 83); /* Switches white text to dark blue when card turns yellow */
 }
 
+.Upcoming h2,
 .Upcoming li {
     color: white;
-    font-size: 20px;
+    transition: color 0.4s ease;
+}
+
+
+/* ==========================================
+   2. PHONE MEDIA QUERY (Up to 767px)
+   ========================================== */
+@media screen and (max-width: 767px) {
+
+    main {
+        padding: 15px 10px;
+        border-width: 3px;
+    }
+
+    .top {
+        display: flex;
+        flex-direction: column-reverse; /* Logo on top, text below */
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .logo img {
+        width: 100%;
+        max-width: 280px;
+        margin-top: 10px;
+    }
+
+    .text {
+        width: 100%;
+        text-align: center;
+        padding: 5px 0;
+    }
+
+    .text h1 {
+        color: rgba(11, 42, 83);
+        font-size: 28px;
+    }
+
+    .text p {
+        font-size: 16px;
+        font-style: oblique;
+        line-height: 1.5;
+        margin-top: 10px;
+    }
+
+    .button {
+        padding: 8px 25px;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .Upcoming {
+        margin: 30px 5px 15px 5px;
+        padding: 15px;
+    }
+
+    .Upcoming h2 {
+        font-size: 20px;
+        padding-left: 0;
+        margin-bottom: 8px;
+    }
+
+    .Upcoming ul {
+        padding-left: 20px;
+    }
+
+    .Upcoming li {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}
+
+
+/* ==========================================
+   3. TABLET MEDIA QUERY (768px to 1023px)
+   ========================================== */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+    main {
+        padding: 20px;
+        border-width: 4px;
+        max-width: 95%;
+        margin: 15px auto;
+    }
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .text {
+        flex: 1 1 60%;
+        text-align: left;
+    }
+
+    .text h1 {
+        color: rgba(11, 42, 83);
+        font-size: 38px;
+    }
+
+    .text p {
+        font-size: 18px;
+        font-style: oblique;
+        line-height: 1.5;
+        margin-top: 10px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        font-size: 22px;
+        margin-top: 25px;
+        margin-right: 15px;
+    }
+
+    .logo {
+        flex: 1 1 40%;
+    }
+
+    .logo img {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .Upcoming {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    .Upcoming h2 {
+        font-size: 22px;
+        padding-left: 5px;
+    }
+
+    .Upcoming ul {
+        padding-left: 25px;
+    }
+
+    .Upcoming li {
+        font-size: 18px;
+        line-height: 1.7;
+    }
+}
+
+
+/* ==========================================
+   4. BIG DESKTOP MEDIA QUERY (1024px and up)
+   ========================================== */
+@media screen and (min-width: 1024px) {
+
+    main {
+        padding: 20px 30px;
+        border-width: 5px;
+        max-width: 1400px;
+        margin: 20px auto;
+    }
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        max-width: 1500px;
+    }
+
+    .text {
+        flex: 1 1 50%;
+        text-align: center;
+        max-width: 650px;
+        padding: 10px 0;
+    }
+
+    .text h1 {
+        color: rgba(11, 42, 83);
+        font-size: 50px;
+    }
+
+    .text p {
+        font-size: 20px;
+        font-style: oblique;
+        line-height: 1.5;
+    }
+
+    .button {
+        padding: 10px 50px;
+        font-size: 30px;
+        margin-top: 45px;
+        margin-right: 27px;
+    }
+
+    .logo img {
+        width: 100%;
+        max-width: 550px;
+        margin-top: 25px;
+    }
+
+    .Upcoming {
+        margin: 65px 10px 25px 10px;
+        padding: 15px 25px;
+    }
+
+    .Upcoming h2 {
+        font-size: 25px;
+        padding-left: 10px;
+        margin-top: 10px;
+    }
+
+    .Upcoming ul {
+        padding-left: 30px;
+    }
+
+    .Upcoming li {
+        font-size: 20px;
+        line-height: 1.8;
+    }
 }
